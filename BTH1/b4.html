@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biểu mẫu thông tin nhân viên</title>
+</head>
+<body>
+    <form method="post" action="#">
+        <table cellspacing="0" cellpadding="8" border="0" width="500">
+            <!-- Phần thông tin cơ bản -->
+            <tr>
+                <td colspan="2">
+                    <b>Basic Info</b>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td width="150"><b>Employee ID</b></td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td><b>Last Name</b></td>
+                <td>Dodsworth</td>
+            </tr>
+            <tr>
+                <td><b>First Name</b></td>
+                <td>
+                    <input size="50" value="Anne" name="ten" type="text"> ⓘ
+                </td>
+            </tr>
+            <tr
+                <td valign="top"><b>Gender</b></td>
+                <td>
+                    <input value="nam" name="gioitinh" type="radio"> Male<br>
+                    <input value="nu" name="gioitinh" type="radio"> Female<br>
+                    <input value="khac" name="gioitinh" type="radio"> Other<br>
+                    <input checked value="zzz" name="gioitinh" type="radio"> ZZZ
+                </td>
+            </tr>
+            <tr>
+                <td><b>Title</b></td>
+                <td><input size="50" value="Sales Representative" name="chucvu" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Suffix</b></td>
+                <td><input size="50" value="Ms." name="hauто" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>BirthDate</b></td>
+                <td>
+                    <input size="50" value="1969-07-02T00:00:00" name="ngaysinh" type="datetime-local"> ⓘ
+                </td>
+            </tr>
+            <tr>
+                <td><b>HireDate</b></td>
+                <td><input size="50" value="1994-11-15T00:00:00" name="ngayvaolam" type="datetime-local"></td>
+            </tr>
+            <tr>
+                <td><b>SSN # (if applicable)</b></td>
+                <td>
+                    <input size="50" value="" name="soxahoi" type="text"> ⓘ
+                </td>
+            </tr>
+            <tr>
+                <td><b>Reports To</b></td>
+                <td>
+                    <input list="danh-sach-quan-ly" size="20" value="Buchanan" name="baocaogoi" type="text"> ↕
+                    <datalist id="danh-sach-quan-ly">
+                        <option value="Buchanan">
+                    </datalist>
+                </td>
+            </tr>
+            
+            <!-- Phần thông tin liên lạc -->
+            <tr>
+                <td colspan="2">
+                    <br>
+                    <b>Contact Info</b>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Email</b></td>
+                <td><input size="50" placeholder="name@example.com" name="thudientu" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Address</b></td>
+                <td><input size="50" value="7 Houndstooth Rd." name="diachi" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>City</b></td>
+                <td><input size="50" value="London" name="thanhpho" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Region</b></td>
+                <td><input size="50" value="" name="vung" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Postal Code</b></td>
+                <td><input size="50" value="WG2 7LT" name="mabuu" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Country</b></td>
+                <td>
+                    <input list="ds-quocgia" size="20" value="Russian Federation" name="quocgia" type="text"> ↕
+                    <datalist id="ds-quocgia">
+                        <option value="Russian Federation">
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td><b>US Home Phone</b></td>
+                <td><input size="50" value="(234)234-2342" name="dienthoai" type="text"></td>
+            </tr>
+            <tr>
+                <td><b>Photo</b></td>
+                <td><input size="50" value="EmpID9.bmp" name="hinhanh" type="text"></td>
+            </tr>
+            
+            <!-- Phần thông tin tùy chọn -->
+            <tr>
+                <td colspan="2">
+                    <br>
+                    <b>Optional Info</b>
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top"><b>Notes</b></td>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="5" border="1">
+                        <tr>
+                            <td bgcolor="#f0f0f0">
+                                <b>B</b> <i>I</i> <u>U</u> <s>S</s> | 
+                                ≡ ≡ ≡ | ≡ ≡ ≡ | ✓ ✗ | ∞ ∞ | 
+                                ∞ ∞ | ⬜ 🎨 | 🔤 | 14 10 | ⬜
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea cols="55" rows="5" name="ghichu">Anne has a BA degree in English from St. Lawrence College. She is fluent in French and German ZZZ</textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top"><b>Preferred Shift</b></td>
+                <td>
+                    <input value="thuong" name="calamviec" type="radio"> Regular<br>
+                    <input checked name="cadem" type="checkbox"> Gravy Yard
+                </td>
+            </tr>
+            <tr>
+                <td><b>Active?</b></td>
+                <td><input checked name="hoatdong" type="checkbox"></td>
+            </tr>
+            <tr>
+                <td valign="top"><b>Are you human?</b></td>
+                <td>
+                    <table cellspacing="0" cellpadding="3" border="0">
+                        <tr>
+                            <td>
+                                <table cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td><b>T</b></td>
+                                        <td width="5"></td>
+                                        <td><b>I</b></td>
+                                        <td width="5"></td>
+                                        <td><b>D</b></td>
+                                        <td width="5"></td>
+                                        <td><b>A</b></td>
+                                        <td width="5"></td>
+                                        <td><b>N</b></td>
+                                        <td width="5"></td>
+                                        <td><b>O</b></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><font color="blue" size="2"><u>Click to change</u></font></td>
+                        </tr>
+                        <tr>
+                            <td><input size="50" name="xacnhan" type="text"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <!-- Các nút điều khiển -->
+            <tr>
+                <td colspan="2">
+                    <br>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <tr>
+                            <td align="left">
+                                <button bgcolor="#444444" type="button">◄</button>
+                                <button bgcolor="#444444" type="button">►</button>
+                            </td>
+                            <td align="right">
+                                <button bgcolor="#444444" type="submit">✉ Submit</button>
+                                <button bgcolor="#444444" type="button">✖ Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <font size="2">* required</font>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
