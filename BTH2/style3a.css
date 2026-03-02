@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  background-color: #f5f5f5;
+}
+
+#main-header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* --- Cải tiến nav bằng Flexbox (Thay thế cho nav a cũ) --- */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: #f8f9fa;
+  padding: 15px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Georgia", serif;
+}
+
+a:hover {
+  color: #ff6600;
+  background-color: #eee;
+}
+
+/* --- Cải tiến .posts bằng Flexbox --- */
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+/* --- Cải tiến .card bằng Flexbox --- */
+.card {
+  flex: 0 0 calc(33.33% - 20px);
+  border: 1px solid #ddd;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* --- Responsive cho màn hình nhỏ --- */
+@media (max-width: 768px) {
+  .posts {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: 1 1 100%;
+  }
+}
