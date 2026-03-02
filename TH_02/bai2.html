@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joe's Travel Page</title>
+    <style>
+      /* CSS Reset cơ bản */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Header */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        background-color: #f8f8f8;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+        background: transparent;
+      }
+
+      .logo {
+        color: #f4d03f;
+        font-size: 24px;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #1abc9c;
+        margin-left: 20px;
+        font-weight: bold;
+      }
+
+      /* Main Content */
+      main {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        background-image: url("https://via.placeholder.com/1200x600/45b3e0/ffffff?text=Ocean+Background");
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .hero-content {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 40px;
+        text-align: center;
+        border-radius: 8px;
+        color: white;
+      }
+
+      .hero-content h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+      }
+
+      .hero-content p {
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .btn-discover {
+        background-color: #f1c40f;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      /* Highlights Section */
+      .highlights {
+        padding: 50px 20px;
+        background-color: #e0f7fa;
+        text-align: center;
+      }
+
+      .highlights h2 {
+        margin-bottom: 30px;
+        color: #333;
+        font-weight: normal;
+      }
+
+      .card-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 300px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .card-title {
+        padding: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #1abc9c;
+      }
+
+      .card-title span {
+        color: #7f8c8d;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #222;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      footer img {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">TRAVEL GOALS</div>
+      <nav>
+        <a href="#">Destinations</a>
+        <a href="#">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>JOE'S TRAVEL PAGE</h1>
+          <p>LET'S EXPLORE THE WORLD TOGETHER!</p>
+          <button class="btn-discover">Discover places</button>
+        </div>
+      </section>
+
+      <section class="highlights">
+        <h2>HIGHLIGHTS</h2>
+        <div class="card-container">
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/300x150/cccccc/000000?text=Miami"
+              alt="Miami"
+            />
+            <div class="card-title">MIAMI <span>USA</span></div>
+          </div>
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/300x150/cccccc/000000?text=Munich"
+              alt="Munich"
+            />
+            <div class="card-title">MUNICH <span>GERMANY</span></div>
+          </div>
+          <div class="card">
+            <img
+              src="https://via.placeholder.com/300x150/cccccc/000000?text=Barcelona"
+              alt="Barcelona"
+            />
+            <div class="card-title">BARCELONA <span>SPAIN</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/87/87390.png"
+        alt="Instagram"
+        style="filter: invert(1)"
+      />
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/20/20673.png"
+        alt="Facebook"
+        style="filter: invert(1)"
+      />
+    </footer>
+  </body>
+</html>
