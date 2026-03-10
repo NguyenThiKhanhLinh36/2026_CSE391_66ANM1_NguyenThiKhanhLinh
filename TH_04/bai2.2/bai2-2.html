@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Đặt Hàng</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; max-width: 520px; margin: auto; }
+    h2 { margin-bottom: 20px; }
+    .field { margin-bottom: 16px; }
+    label { display: block; margin-bottom: 4px; font-weight: bold; }
+    input[type="text"], input[type="number"], input[type="date"], select, textarea {
+      width: 100%; padding: 8px; box-sizing: border-box;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    input.error, select.error, textarea.error { border-color: red; }
+    .err-msg { color: red; font-size: 0.85em; margin-top: 4px; display: none; }
+    .err-msg.show { display: block; }
+    .radio-group label { font-weight: normal; display: inline; margin-right: 14px; }
+    .char-count { font-size: 0.82em; color: #666; margin-top: 3px; }
+    .char-count.over { color: red; }
+    #tong-tien { margin: 10px 0; font-weight: bold; color: #2c7a2c; }
+    button { padding: 10px 20px; background: #4CAF50; color: white;
+             border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
+    button:hover { background: #45a049; }
+    #div-xacnhan {
+      display: none; border: 1px solid #aaa; border-radius: 6px;
+      padding: 18px; background: #f9f9f9; margin-top: 20px;
+    }
+    #div-xacnhan h3 { margin-bottom: 10px; }
+    #div-xacnhan p { margin: 4px 0; }
+    .btn-group { margin-top: 14px; display: flex; gap: 10px; }
+    .btn-huy { background: #e53935; }
+    .btn-huy:hover { background: #c62828; }
+    #success { display: none; text-align: center; font-size: 1.2em; color: green; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<h2>Form Đặt Hàng</h2>
+
+<form id="form-dh">
+
+  <div class="field">
+    <label>Tên sản phẩm</label>
+    <select id="sanpham">
+      <option value="">-- Chọn sản phẩm --</option>
+      <option value="Áo thun">Áo thun</option>
+      <option value="Quần jean">Quần jean</option>
+      <option value="Giày sneaker">Giày sneaker</option>
+      <option value="Túi xách">Túi xách</option>
+    </select>
+    <div class="err-msg" id="err-sanpham"></div>
+  </div>
+
+  <div class="field">
+    <label>Số lượng</label>
+    <input type="number" id="soluong" min="1" max="99" placeholder="1 - 99">
+    <div class="err-msg" id="err-soluong"></div>
+  </div>
+
+  <div id="tong-tien">Tổng tiền: --</div>
+
+  <div class="field">
+    <label>Ngày giao hàng</label>
+    <input type="date" id="ngaygiao">
+    <div class="err-msg" id="err-ngaygiao"></div>
+  </div>
+
+  <div class="field">
+    <label>Địa chỉ giao</label>
+    <input type="text" id="diachi" placeholder="Nhập địa chỉ (ít nhất 10 ký tự)">
+    <div class="err-msg" id="err-diachi"></div>
+  </div>
+
+  <div class="field">
+    <label>Ghi chú</label>
+    <textarea id="ghichu" rows="3" placeholder="Không bắt buộc, tối đa 200 ký tự"></textarea>
+    <div class="char-count" id="char-count">0/200</div>
+    <div class="err-msg" id="err-ghichu"></div>
+  </div>
+
+  <div class="field">
+    <label>Phương thức thanh toán</label>
+    <div class="radio-group">
+      <input type="radio" name="thanhtoan" value="COD"> <label>COD</label>
+      <input type="radio" name="thanhtoan" value="Chuyển khoản"> <label>Chuyển khoản</label>
+      <input type="radio" name="thanhtoan" value="Ví điện tử"> <label>Ví điện tử</label>
+    </div>
+    <div class="err-msg" id="err-thanhtoan"></div>
+  </div>
+
+  <button type="submit">Đặt hàng</button>
+</form>
+
+<!-- Div xác nhận -->
+<div id="div-xacnhan">
+  <h3>Xác nhận đơn hàng</h3>
+  <p id="xn-sanpham"></p>
+  <p id="xn-soluong"></p>
+  <p id="xn-tong"></p>
+  <p id="xn-ngay"></p>
+  <p id="xn-thanhtoan"></p>
+  <div class="btn-group">
+    <button onclick="xacNhan()">Xác nhận</button>
+    <button class="btn-huy" onclick="huyXacNhan()">Hủy</button>
+  </div>
+</div>
+
+<div id="success"></div>
+
+<script>
+  const prices = {
+    "Áo thun": 150000,
+    "Quần jean": 200000,
+    "Giày sneaker": 350000,
+    "Túi xách": 280000
+  };
+
+  // --- Tiện ích ---
+  function showError(id, msg) {
+    const err = document.getElementById("err-" + id);
+    const el = document.getElementById(id);
+    err.textContent = msg;
+    err.classList.add("show");
+    if (el) el.classList.add("error");
+  }
+
+  function clearError(id) {
+    const err = document.getElementById("err-" + id);
+    const el = document.getElementById(id);
+    err.classList.remove("show");
+    if (el) el.classList.remove("error");
+  }
+
+  function fmtTien(so) {
+    return Number(so).toLocaleString("vi-VN") + " đ";
+  }
+
+  // --- Tính tổng tiền ---
+  function tinhTong() {
+    const sp = document.getElementById("sanpham").value;
+    const sl = parseInt(document.getElementById("soluong").value);
+    if (sp && prices[sp] && sl > 0) {
+      document.getElementById("tong-tien").textContent = "Tổng tiền: " + fmtTien(prices[sp] * sl);
+    } else {
+      document.getElementById("tong-tien").textContent = "Tổng tiền: --";
+    }
+  }
+
+  // --- Validate ---
+  function validateSanpham() {
+    const val = document.getElementById("sanpham").value;
+    if (!val) { showError("sanpham", "Vui lòng chọn sản phẩm"); return false; }
+    clearError("sanpham"); return true;
+  }
+
+  function validateSoluong() {
+    const val = document.getElementById("soluong").value;
+    const n = parseInt(val);
+    if (!val) { showError("soluong", "Vui lòng nhập số lượng"); return false; }
+    if (isNaN(n) || n < 1 || n > 99) { showError("soluong", "Số lượng phải từ 1 đến 99"); return false; }
+    clearError("soluong"); return true;
+  }
+
+  function validateNgaygiao() {
+    const val = document.getElementById("ngaygiao").value;
+    if (!val) { showError("ngaygiao", "Vui lòng chọn ngày giao hàng"); return false; }
+
+    const chon = new Date(val);
+    const homNay = new Date();
+    homNay.setHours(0, 0, 0, 0);
+
+    const max = new Date(homNay);
+    max.setDate(max.getDate() + 30);
+
+    if (chon < homNay) { showError("ngaygiao", "Ngày giao không được là ngày trong quá khứ"); return false; }
+    if (chon > max) { showError("ngaygiao", "Ngày giao không quá 30 ngày từ hôm nay"); return false; }
+    clearError("ngaygiao"); return true;
+  }
+
+  function validateDiachi() {
+    const val = document.getElementById("diachi").value.trim();
+    if (!val) { showError("diachi", "Địa chỉ không được để trống"); return false; }
+    if (val.length < 10) { showError("diachi", "Địa chỉ phải có ít nhất 10 ký tự"); return false; }
+    clearError("diachi"); return true;
+  }
+
+  function validateGhichu() {
+    const val = document.getElementById("ghichu").value;
+    if (val.length > 200) { showError("ghichu", "Ghi chú không được quá 200 ký tự"); return false; }
+    clearError("ghichu"); return true;
+  }
+
+  function validateThanhtoan() {
+    const checked = document.querySelector('input[name="thanhtoan"]:checked');
+    if (!checked) { showError("thanhtoan", "Vui lòng chọn phương thức thanh toán"); return false; }
+    clearError("thanhtoan"); return true;
+  }
+
+  // --- Đếm ký tự ghi chú ---
+  document.getElementById("ghichu").addEventListener("input", function() {
+    const len = this.value.length;
+    const counter = document.getElementById("char-count");
+    counter.textContent = len + "/200";
+    counter.className = "char-count" + (len > 200 ? " over" : "");
+    clearError("ghichu");
+    if (len > 200) showError("ghichu", "Ghi chú không được quá 200 ký tự");
+  });
+
+  // --- Tính tổng tự động ---
+  document.getElementById("sanpham").addEventListener("change", tinhTong);
+  document.getElementById("soluong").addEventListener("input", tinhTong);
+
+  // --- Blur ---
+  document.getElementById("sanpham").addEventListener("blur", validateSanpham);
+  document.getElementById("soluong").addEventListener("blur", validateSoluong);
+  document.getElementById("ngaygiao").addEventListener("blur", validateNgaygiao);
+  document.getElementById("diachi").addEventListener("blur", validateDiachi);
+
+  // --- Xóa lỗi khi nhập lại ---
+  ["soluong", "ngaygiao", "diachi"].forEach(id => {
+    document.getElementById(id).addEventListener("input", () => clearError(id));
+  });
+
+  // --- Submit ---
+  document.getElementById("form-dh").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const hopLe = validateSanpham() & validateSoluong() & validateNgaygiao()
+                & validateDiachi() & validateGhichu() & validateThanhtoan();
+
+    if (!hopLe) return;
+
+    // Điền thông tin vào div xác nhận
+    const sp = document.getElementById("sanpham").value;
+    const sl = parseInt(document.getElementById("soluong").value);
+    const tong = fmtTien(prices[sp] * sl);
+    const ngay = document.getElementById("ngaygiao").value;
+    const tt = document.querySelector('input[name="thanhtoan"]:checked').value;
+
+    document.getElementById("xn-sanpham").textContent   = "Sản phẩm: " + sp;
+    document.getElementById("xn-soluong").textContent   = "Số lượng: " + sl;
+    document.getElementById("xn-tong").textContent      = "Tổng tiền: " + tong;
+    document.getElementById("xn-ngay").textContent      = "Ngày giao: " + ngay;
+    document.getElementById("xn-thanhtoan").textContent = "Thanh toán: " + tt;
+
+    document.getElementById("div-xacnhan").style.display = "block";
+  });
+
+  function xacNhan() {
+    const sp = document.getElementById("sanpham").value;
+    document.getElementById("form-dh").style.display = "none";
+    document.getElementById("div-xacnhan").style.display = "none";
+    const success = document.getElementById("success");
+    success.style.display = "block";
+    success.innerHTML = `Đặt hàng thành công! 🎉<br><small>Cảm ơn bạn đã đặt <strong>${sp}</strong>. Chúng tôi sẽ liên hệ sớm!</small>`;
+  }
+
+  function huyXacNhan() {
+    document.getElementById("div-xacnhan").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
