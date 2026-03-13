@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thực hành Selecting Elements</title>
+  </head>
+  <body>
+    <h1 id="main-title">Tiêu đề chính</h1>
+    <p class="description">Đoạn mô tả thứ nhất.</p>
+    <p class="description">Đoạn mô tả thứ hai.</p>
+
+    <script>
+      let firstDesc = document.querySelector(".description");
+      console.log("Kết quả querySelector:", firstDesc);
+
+      let allDesc = document.querySelectorAll(".description");
+      console.log("Kết quả querySelectorAll:", allDesc);
+
+      let titleElement = document.getElementById("main-title");
+      console.log("Kết quả getElementById:", titleElement);
+    </script>
+  </body>
+</html>

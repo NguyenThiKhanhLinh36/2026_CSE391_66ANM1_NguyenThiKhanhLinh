@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thực hành Modifying Elements</title>
+  </head>
+  <body>
+    <h1 id="main-title">Tiêu đề cũ</h1>
+
+    <div id="content-box"></div>
+
+    <ul id="item-list">
+      <li>Mục 1</li>
+      <li id="delete-me">Mục cần xóa</li>
+    </ul>
+
+    <script>
+      let titleElement = document.querySelector("#main-title");
+      titleElement.textContent = "Tiêu đề đã được thay đổi";
+
+      let contentDiv = document.querySelector("#content-box");
+      contentDiv.innerHTML =
+        "<p><strong>Đoạn văn mới</strong> được chèn bằng innerHTML.</p>";
+
+      let newListItem = document.createElement("li");
+      newListItem.textContent = "Mục mới được tạo";
+
+      let listElement = document.querySelector("#item-list");
+      listElement.appendChild(newListItem);
+
+      let itemToRemove = document.querySelector("#delete-me");
+      itemToRemove.remove();
+    </script>
+  </body>
+</html>

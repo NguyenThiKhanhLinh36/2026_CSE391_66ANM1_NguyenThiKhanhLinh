@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thực hành Event Listeners</title>
+    <style>
+      .bg-color-active {
+        background-color: lightblue;
+      }
+
+      .hover-box {
+        width: 250px;
+        height: 100px;
+        background-color: lightgray;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="action-btn">Click vào đây!</button>
+    <p id="status-text">Đoạn văn bản ban đầu.</p>
+
+    <div id="hover-area" class="hover-box">Di chuột vào tôi</div>
+
+    <script>
+      let btn = document.querySelector("#action-btn");
+      let textDisplay = document.querySelector("#status-text");
+      let hoverBox = document.querySelector("#hover-area");
+
+      btn.addEventListener("click", function () {
+        textDisplay.textContent = "Bạn đã click nút thành công!";
+        document.body.classList.toggle("bg-color-active");
+      });
+
+      btn.addEventListener("click", function () {
+        console.log("Listener thứ 2: Nút vừa được click!");
+      });
+
+      hoverBox.addEventListener("mouseenter", function () {
+        hoverBox.textContent = "Chuột đang ở trong hộp!";
+        hoverBox.style.backgroundColor = "lightgreen";
+      });
+
+      hoverBox.addEventListener("mouseleave", function () {
+        hoverBox.textContent = "Di chuột vào tôi";
+        hoverBox.style.backgroundColor = "lightgray";
+      });
+    </script>
+  </body>
+</html>

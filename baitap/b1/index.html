@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Thực hành Attributes & Classes</title>
+    <style>
+      .highlight {
+        background-color: yellow;
+      }
+      .active {
+        border: 2px solid red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="my-image" src="cat-sus.png" alt="Ảnh cũ" width="100" />
+
+    <p id="my-text" class="text-box old-class">
+      Đoạn văn bản kiểm tra CSS Class.
+    </p>
+
+    <script>
+      let imgElement = document.querySelector("#my-image");
+      imgElement.src = "pepeheart.png";
+      imgElement.alt = "Ảnh mới đã thay đổi";
+
+      let textElement = document.querySelector("#my-text");
+      textElement.classList.add("highlight");
+      textElement.classList.remove("old-class");
+
+      textElement.classList.toggle("active");
+
+      let hasActiveClass = textElement.classList.contains("active");
+      console.log("Thẻ p có chứa class 'active' không?:", hasActiveClass);
+    </script>
+  </body>
+</html>
